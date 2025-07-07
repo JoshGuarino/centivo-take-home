@@ -27,11 +27,11 @@ To create a user, make a POST request to the `/user` endpoint with the following
 ```
 
 To retrieve a user, make a GET request to the `/user/:id` endpoint with the user's ID as the parameter.
-```json
+```
 GET /user/:id
 ```
 To retrieve all users, make a GET request to the `/users` endpoint.
-```json
+```
 GET /users
 ```
 
