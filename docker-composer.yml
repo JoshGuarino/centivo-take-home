@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  api:
+    build: .
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: 'mongodb://mongodb:27017/chatdb'
+      SERVER_PORT: 3000
+      CLIENT_URL: 'http://localhost:5000'
+
+volumes:
+  mongodb_data:
