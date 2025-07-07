@@ -16,7 +16,7 @@ It utilizes Docker containerization to run MongoDB and the API.
 ## Usage
 
 There is a seeding script that runs when the API starts. I created it after I already had created the create user route.
-To create a user, make a POST request to the `/user` endpoint with the following JSON body:
+To create a user, make a POST request to the `/users` endpoint with the following JSON body:
 
 ```json
 {
@@ -26,18 +26,10 @@ To create a user, make a POST request to the `/user` endpoint with the following
 }
 ```
 
-To retrieve a user, make a GET request to the `/user/:id` endpoint with the user's ID as the parameter.
-```
-GET /user/:id
-```
+To retrieve a user, make a GET request to the `/users/:id` endpoint with the user's ID as the parameter.
 To retrieve all users, make a GET request to the `/users` endpoint.
-```
-GET /users
-```
 
 ## Explanation of my approach
 I tried to make the project as simple as possible, so all you need to do is run one command to get started.
 I used Mongoose as the ORM as it made it easier to work with the database. I also used Docker to run MongoDB and the API.
 This allowed whoever looks at this assignment to get up and running quickly without having to install MongoDB or Node.js.
-The getUser endpoint is a bit more complicated than the other two. I used the Mongoose findById method to retrieve the user.
-It validates the ID and returns the user if it exists. If the user doesn't exist, it returns a 404 error. Will return 400 if the ID isnt valid format.
