@@ -1,26 +1,36 @@
 import { Request, Response } from "express";
 import User from "../models/user";
 
-export const getRoot = (res: Response) => {
-  res.send("OK")
+export const getRoot = (req: Request, res: Response) => {
+  res.json("OK")
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find()
+    res.json(users)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json(error)
+  }
 };
 
 export const getUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
     if (!checkIdValid(id)) {
-      res.status(400).send("Invalid ID")
+      res.status(400).json("Invalid ID")
       return
     }
     const user = await User.findById(id)
     if (user) {
-      user.age > 21 ? res.json(user) : res.status(403).send("User is too young")
+      user.age > 21 ? res.json(user) : res.status(403).json("User is too young")
     } else {
-      res.status(404).send("User not found")
+      res.status(404).json("User not found")
     }
   } catch (error) {
     console.error(error)
-    res.status(500).send(error)
+    res.status(500).json(error)
   }
 };
 
@@ -31,7 +41,7 @@ export const makeUser = async (req: Request, res: Response) => {
     res.json(user)
   } catch (error) {
     console.error(error)
-    res.status(500).send(error)
+    res.status(500).json(error)
   }
 };
 
